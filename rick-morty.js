@@ -1,14 +1,18 @@
-const rickMortyURL = "https://rickandmortyapi.com/api/location/3";
+const characterURL = "https://rickandmortyapi.com/api/character";
 
-async function getCharacters(character){
-    const response = await fetch(`${rickMortyURL}/${character}`);
-    const characterData = await response.json();
-    return characterData;
+async function getCharacterById(id) {
+    const response = await fetch(`${characterURL}/${id}`);
+    const data = await response.json();
+    return data;
 }
 
-async function main(){
-    const characterData = await getCharacters('aristisc morty');
-    console.log(characterData);
-
+async function main() {
+    try {
+        const character = await getCharacterById(1);
+        console.log(character);
+    } catch (error) {
+        console.error("Erro ao buscar personagem:", error);
+    }
 }
+
 main();
